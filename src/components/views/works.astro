@@ -1,0 +1,64 @@
+---
+import SectionTitlePrimary from '@/components/parts/sectionTitlePrimary.astro';
+import WorksArchive from '@/components/views/worksArchive.astro';
+import { getCategoryies } from '@/lib/notion';
+
+const cats = await getCategoryies();
+---
+
+<section class="p-index_works" id="link-works">
+  <div class="c-container">
+    <SectionTitlePrimary class="-white">
+      <span class="en">Works</span>
+      <span class="jp">[制作事例]</span>
+    </SectionTitlePrimary>
+    <div class="p-index_works__main">
+      <div class="p-index_works__tab">
+        {cats.map((cat: string, index: number) => <div class={`p-index_works__tab__item js-tab_trg ${index === 0 && 'is-active'}`} data-tab={index} set:html={cat} />)}
+      </div>
+      <div class="p-index_works__body">
+        {cats.map((cat: string, index: number) => <WorksArchive category={cat} panel={index} />)}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .p-index_works {
+    padding-block-end: res_px_max(80px, 160px);
+    &__tab {
+      max-inline-size: res_px_max(360px, 906px);
+      margin-inline: auto;
+      background-color: var(--color-main-60);
+      padding: res_px_max(8px, 16px) res_px_max(16px, 28px);
+      border-radius: 100vmax;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: res_px_max(8px, 32px);
+      margin-block-end: res_px_max(28px, 32px);
+      &__item {
+        background-color: var(--color-white-00);
+        border-radius: 100vmax;
+        font-family: var(--font-en);
+        color: var(--color-main-60);
+        text-align: center;
+        padding: res_px_max(5px, 10px);
+        font-weight: 600;
+        font-size: res_rem_max(14px, 18px);
+        cursor: pointer;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+        @include hover {
+          &:hover {
+            background-color: var(--color-point-10);
+          }
+        }
+        &.is-active {
+          background-color: var(--color-point-50);
+          color: var(--color-white-00);
+        }
+      }
+    }
+  }
+</style>

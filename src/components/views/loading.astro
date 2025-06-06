@@ -1,0 +1,109 @@
+<div class="c-loading" id="js-loading">
+  <div class="c-loading__inner">
+    <div class="c-loading__motif">
+      <svg viewBox="0 0 93 87" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M85.7251 7.3265C76.417 -2.00369 61.3314 -2.00369 52.0299 7.3265C50.2874 9.07303 48.9643 11.5878 47.9621 14.5228C47.4315 16.0723 45.2698 16.0723 44.7393 14.5228C43.737 11.5944 42.4139 9.0796 40.6715 7.3265C31.3699 -1.99712 16.2843 -1.99712 6.97618 7.3265C-2.32539 16.6501 -2.32539 31.778 6.97618 41.1016C11.1422 45.2776 19.6578 47.0504 27.7934 47.7332C34.4748 48.2913 39.5972 53.9249 39.5972 60.6484V84.7913C39.5972 85.7303 40.357 86.4985 41.3003 86.4985H51.3945C52.3312 86.4985 53.0976 85.7368 53.0976 84.7913V60.6484C53.0976 53.9249 58.22 48.2913 64.9014 47.7332C73.037 47.0504 81.5591 45.2776 85.7186 41.1016C95.0201 31.7715 95.0201 16.6501 85.7186 7.3265H85.7251Z"
+          fill="currentColor"></path>
+      </svg>
+    </div>
+    <div class="c-loading__text">
+      {
+        `now loading...`.split('').map((char, index) => (
+          <span class={`c-loading__text__char c-loading__text__char--${index}`} data-index={index}>
+            {char}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  @keyframes textAnim {
+    0% {
+      translate: 0 0;
+    }
+
+    10% {
+      translate: 0 -8px;
+    }
+
+    20% {
+      translate: 0 0px;
+    }
+
+    100% {
+      translate: 0 0;
+    }
+  }
+  .c-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--color-main-30);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: all 0.4s linear;
+    &.is-hidden {
+      visibility: hidden;
+      pointer-events: none;
+      opacity: 0;
+    }
+    &::before {
+      content: '';
+      width: 100%;
+      height: 100%;
+      background-image: url('/img/common/bg_pattern.png');
+      background-size: res_px_max(35px, 65px) res_px_max(35px, 65px);
+      background-repeat: repeat;
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      opacity: 0.14;
+      z-index: -1;
+    }
+    &__inner {
+      text-align: center;
+    }
+    &__motif {
+      inline-size: res_rem_max(40px, 50px);
+      aspect-ratio: 93 / 87;
+      margin-inline: auto;
+      margin-block-end: res_px_max(10px, 20px);
+      color: var(--color-main-60);
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &__text {
+      font-size: res_rem_max(13px, 20px);
+      text-transform: uppercase;
+      font-family: var(--font-en);
+      font-weight: 700;
+      display: flex;
+      letter-spacing: 0.2em;
+      color: var(--color-white-00);
+      &__char {
+        display: block;
+        line-height: 1;
+        animation: textAnim 2.5s ease-in-out infinite;
+        &:nth-child(3) {
+          padding-inline-end: 0.25em;
+        }
+        @for $i from 0 through 20 {
+          &:nth-child(#{$i}) {
+            animation-delay: #{$i * 100}ms;
+          }
+        }
+      }
+    }
+  }
+</style>

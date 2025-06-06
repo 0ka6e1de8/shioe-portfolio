@@ -1,0 +1,86 @@
+@use 'sass:math';
+@use 'sass:string';
+@use './variable' as *;
+
+@function rem($px) {
+  @return #{math.div($px, 16px) + 'rem'};
+}
+
+// 画面サイズによってサイズが変動するpxやremを出力する
+// 上限や下限のない初期バージョン
+
+@function res_rem($min-font, $max-font, $media-min: $unionnet-min, $media-max: $unionnet-max) {
+  $times: math.div(($max-font - $min-font) * 100, $media-max - $media-min);
+  $plus: ($max-font) - (math.div($media-max, 100) * $times);
+  @return calc(#{$times}vw + #{string.slice(#{math.div($plus, 16)}, 1, string.index(#{math.div($plus, 16)}, px)-1)+ (rem)});
+}
+
+@function res_px($min-size, $max-size, $media-min: $unionnet-min, $media-max: $unionnet-max) {
+  $times: math.div(($max-size - $min-size) * 100, $media-max - $media-min);
+  $plus: ($max-size) - (math.div($media-max, 100) * $times);
+  @return calc(#{$times}vw + #{string.slice(#{($plus)}, 1, string.index(#{($plus)}, px)-1)+ (px)});
+}
+
+// --------------------------------
+
+// clamp関数採用バージョン 2022/07/21
+// https://unionnet.esa.io/posts/1782
+
+// @function res_rem_clamp($min-font, $max-font, $media-min: $unionnet-min, $media-max: $unionnet-max) {
+//   $times: math.div(($max-font - $min-font) * 100, $media-max - $media-min);
+//   $plus: ($max-font) - (math.div($media-max, 100) * $times);
+//   @if $max-font >= $min-font {
+//     @return clamp(
+//       #{string.slice(#{math.div($min-font, 16)}, 1, string.index(#{math.div($min-font, 16)}, px)-1) + (rem)},
+//       calc(#{$times}vw + #{string.slice(#{math.div($plus, 16)}, 1, string.index(#{math.div($plus, 16)}, px)-1) + (rem)}),
+//       #{string.slice(#{math.div($max-font, 16)}, 1, string.index(#{math.div($max-font, 16)}, px)-1) + (rem)}
+//     );
+//   } @else {
+//     @return clamp(
+//       #{string.slice(#{math.div($max-font, 16)}, 1, string.index(#{math.div($max-font, 16)}, px)-1) + (rem)},
+//       calc(#{$times}vw + #{string.slice(#{math.div($plus, 16)}, 1, string.index(#{math.div($plus, 16)}, px)-1) + (rem)}),
+//       #{string.slice(#{math.div($min-font, 16)}, 1, string.index(#{math.div($min-font, 16)}, px)-1) + (rem)}
+//     );
+//   }
+// }
+
+// @function res_px_clamp($min-size, $max-size, $media-min: $unionnet-min, $media-max: $unionnet-max) {
+//   $times: math.div(($max-size - $min-size) * 100, $media-max - $media-min);
+//   $plus: ($max-size) - (math.div($media-max, 100) * $times);
+//   @if $max-size >= $min-size {
+//     @return clamp($min-size, calc(#{$times}vw + #{string.slice(#{($plus)}, 1, string.index(#{($plus)}, px)-1) + (px)}), $max-size);
+//   } @else {
+//     @return clamp($max-size, calc(#{$times}vw + #{string.slice(#{($plus)}, 1, string.index(#{($plus)}, px)-1) + (px)}), $min-size);
+//   }
+// }
+
+// --------------------------------
+
+// min関数採用バージョン 2022/10/20
+// 横幅360pxのスマホ対策、下限をやめることで375px以下になっても小さくなる
+
+@function res_rem_max($min-font, $max-font, $media-min: $unionnet-min, $media-max: $unionnet-max) {
+  $times: math.div(($max-font - $min-font) * 100, $media-max - $media-min);
+  $plus: ($max-font) - (math.div($media-max, 100) * $times);
+  @if $max-font >= $min-font {
+    @return min(
+      calc(#{$times}vw + #{string.slice(#{math.div($plus, 16)}, 1, string.index(#{math.div($plus, 16)}, px)-1) + (rem)}),
+      #{string.slice(#{math.div($max-font, 16)}, 1, string.index(#{math.div($max-font, 16)}, px)-1) + (rem)}
+    );
+  } @else {
+    @return max(
+      calc(#{$times}vw + #{string.slice(#{math.div($plus, 16)}, 1, string.index(#{math.div($plus, 16)}, px)-1) + (rem)}),
+      #{string.slice(#{math.div($max-font, 16)}, 1, string.index(#{math.div($max-font, 16)}, px)-1) + (rem)}
+    );
+  }
+}
+
+@function res_px_max($min-size, $max-size, $media-min: $unionnet-min, $media-max: $unionnet-max) {
+  $times: math.div(($max-size - $min-size) * 100, $media-max - $media-min);
+  $plus: ($max-size) - (math.div($media-max, 100) * $times);
+  @if $max-size >= $min-size {
+    @return min(calc(#{$times}vw + #{string.slice(#{($plus)}, 1, string.index(#{($plus)}, px)-1) + (px)}), $max-size);
+  } @else {
+    @return max(calc(#{$times}vw + #{string.slice(#{($plus)}, 1, string.index(#{($plus)}, px)-1) + (px)}), $max-size);
+  }
+}

@@ -1,0 +1,39 @@
+@keyframes hoverArrowVertical {
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+
+  25% {
+    transform: translateY(50%);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes loop {
+  0% {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes loop2 {
+  0% {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-200%);
+  }
+}

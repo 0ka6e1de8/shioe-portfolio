@@ -1,0 +1,99 @@
+---
+import FontAwesome from './fontAwesome.astro';
+type Props = {
+  id?: string;
+  title: string;
+  desc?: string;
+  image?: string;
+  url?: string;
+  category?: string;
+  class?: string;
+};
+
+const { class: className, id, title, desc, image, url, category } = Astro.props;
+---
+
+<div class="c-work_item js-modal_trg" data-id={`modal-${id}`}>
+  <div class="c-work_item__thumb">
+    <img src={image} alt="" />
+  </div>
+  <div class="c-work_item__title" set:html={title} />
+  <button class="c-work_item__button">
+    <span class="c-work_item__button__text">詳しく見る</span>
+    <i class="c-work_item__button__icon">+</i>
+  </button>
+</div>
+
+<div class="c-modal_overlay js-modal_overlay"></div>
+<div class="c-modal js-modal_body" id={`modal-${id}`}>
+  <div class="c-modal__thumb">
+    <img src={image} alt="" />
+  </div>
+  <div class="c-modal__title" set:html={title} />
+  <div class="c-modal__link">
+    <a href={url} target="_blank" rel="noopener noreferrer" class="c-modal__link__text"> 実際のサイトはこちら<FontAwesome icon="blank" /> </a>
+  </div>
+  <p class="c-modal__desc" set:html={desc} />
+  <div class="c-modal_close js-modal_close">× 閉じる</div>
+</div>
+
+<style lang="scss">
+  .c-work_item {
+    padding: res_px_max(10px, 20px) res_px_max(10px, 20px) res_px_max(30px, 60px);
+    border-radius: res_px_max(20px, 40px);
+    transition: all var(--dur) ease;
+    cursor: pointer;
+    @include hover {
+      &:hover {
+        background-color: var(--color-main-60);
+        .c-work_item__thumb {
+          :global(img) {
+            scale: 1.05;
+          }
+        }
+        .c-work_item__button {
+          background-color: var(--color-main-80);
+          color: var(--color-white-00);
+        }
+      }
+    }
+    &__thumb {
+      border-radius: res_px_max(16px, 32px);
+      overflow: hidden;
+      margin-block-end: res_px_max(16px, 28px);
+      aspect-ratio: 548 / 384;
+      overflow: hidden;
+      :global(img) {
+        inline-size: 100%;
+        block-size: 100%;
+        object-position: left center;
+        transition: all 0.45s ease-in-out;
+      }
+    }
+    &__title {
+      font-size: res_rem_max(15px, 24px);
+      font-weight: 700;
+      color: var(--color-white-00);
+      margin-block-end: res_px_max(16px, 28px);
+    }
+    &__button {
+      background-color: var(--color-white-00);
+      color: var(--color-main-60);
+      border-radius: 100vmax;
+      inline-size: res_rem_max(200px, 300px);
+      padding: res_px_max(8px, 16px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: res_rem_max(14px, 18px);
+      font-weight: 500;
+      gap: res_px_max(5px, 10px);
+      transition: all var(--dur) ease;
+      &__text {
+      }
+      &__icon {
+        font-style: normal;
+      }
+    }
+  }
+</style>

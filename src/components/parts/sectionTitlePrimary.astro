@@ -1,0 +1,43 @@
+---
+type Props = {
+  class?: string;
+};
+const { class: className } = Astro.props;
+---
+
+<h2 class={`c-section_title_primary ${className && className}`}>
+  <div class="c-section_title_primary__motif">
+    <img src="/img/common/title_parts.png" alt="" />
+  </div>
+  <slot />
+</h2>
+
+<style lang="scss">
+  .c-section_title_primary {
+    margin-block-end: res_px_max(40px, 60px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    color: var(--color-main-80);
+    font-weight: 700;
+    &.-white {
+      color: var(--color-white-00);
+    }
+    &__motif {
+      inline-size: res_px_max(14px, 15px);
+      aspect-ratio: 1;
+      margin-inline: auto;
+      margin-block-end: res_px_max(8px, 16px);
+    }
+    :global(.en) {
+      font-family: var(--font-en);
+      font-size: res_rem_max(45px, 63px);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+    :global(.jp) {
+      font-size: res_rem_max(15px, 20px);
+    }
+  }
+</style>

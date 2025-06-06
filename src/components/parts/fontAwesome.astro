@@ -1,0 +1,31 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+const icons = {
+  blank: `<svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><g><path d="M3.375 0V14.625H18V0H3.375ZM16.5938 13.2188H4.78125V1.40625H16.5938V13.2188Z"/><path d="M1.40625 16.5938V10.4062V4.78125V3.375H0V18H14.625V16.5938H13.2188H1.40625Z"/><path d="M8.18465 10.9978L12.3282 6.85433V9.83558H13.7344V4.45386H8.3527V5.86011H11.3339L7.19043 10.0036L8.18465 10.9978Z" /></g></svg>`,
+};
+
+type Props = HTMLAttributes<'span'> & {
+  icon: keyof typeof icons;
+};
+
+const { icon, class: className, ...rest } = Astro.props;
+---
+
+<span {...rest} class:list={['c-icon', className]} set:html={icons[icon]} />
+
+<style lang="scss">
+  .c-icon {
+    inline-size: var(--icon-size, 1em);
+    min-inline-size: var(--icon-size, 1em);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    :global(svg) {
+      inline-size: 100%;
+      block-size: 100%;
+      fill: var(--icon-color, currentColor);
+    }
+  }
+</style>

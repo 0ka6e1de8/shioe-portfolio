@@ -1,0 +1,41 @@
+<header class="l-header">
+  <nav class="l-header__navi">
+    <div class="l-header__navi__item">
+      <a href="#link-works">制作事例</a>
+    </div>
+    <div class="l-header__navi__item">
+      <a href="#link-profile">自己紹介</a>
+    </div>
+    <div class="l-header__navi__item">
+      <a href="#link-contact">お問い合わせ</a>
+    </div>
+  </nav>
+</header>
+
+<style lang="scss">
+  .l-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    padding: res_px_max(15px, 27px) res_px_max(20px, 40px) res_px_max(10px, 20px);
+    @include mq-sp {
+      padding-inline-end: res_px_max(10px, 20px);
+    }
+    &__navi {
+      display: flex;
+      gap: res_px_max(10px, 60px);
+      inline-size: fit-content;
+      margin-inline-start: auto;
+      color: var(--color-white-00);
+      font-weight: 700;
+      a {
+        padding: 0.5em;
+        @include mq-sp {
+          padding-inline: 0.25em;
+        }
+      }
+    }
+  }
+</style>

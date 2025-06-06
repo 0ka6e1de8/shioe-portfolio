@@ -1,0 +1,166 @@
+@use './variable' as *;
+@use './function' as *;
+@use './mixin' as *;
+:root {
+  --font-ja: 'Zen Kaku Gothic New', sans-serif;
+  --font-en: 'Jost', sans-serif;
+
+  --color-black-100: #123d3a;
+  --color-white-00: #fff;
+  --color-navy-100: #0e487f;
+  --color-main-80: #257a73;
+  --color-main-60: #27b9ae;
+  --color-main-50: #2bcec1;
+  --color-main-30: #9ee6e0;
+  --color-main-10: #d8f5f2;
+  --color-point-100: #613036;
+  --color-point-80: #924951;
+  --color-point-60: #c2616c;
+  --color-point-50: #f37987;
+  --color-point-30: #f7a1ab;
+  --color-point-10: #fbd7db;
+
+  --color-gradient-main: linear-gradient(to bottom, #19c8ba 0%, #d6eaff 100%);
+  --color-gradient-point: linear-gradient(to bottom, #f37987 0%, #fbbec5 100%);
+
+  --ease-in-sine: cubic-bezier(0.47, 0, 0.745, 0.715);
+  --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --ease-in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  --ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  --ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  --ease-in-back: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  --ease-out-sine: cubic-bezier(0.39, 0.575, 0.565, 1);
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+  --ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-in-out-sine: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+  --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
+  --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  --ease-in-out-back: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  --dur: 0.3s;
+  --z-loading: 9000;
+  --z-header: 6000;
+  --z-drawer: 5000;
+  --header-height: 100px;
+}
+
+body {
+  color: var(--color-black-100);
+  font-family: var(--font-ja);
+  -webkit-text-size-adjust: 100%;
+  font-feature-settings: 'palt';
+  text-indent: res_rem_max(0px, 0px);
+  font-size: res_rem_max(14px, 16px);
+  letter-spacing: 0;
+  line-height: 1.8;
+  // font-weight: 500;
+  &.is-drawer-open,
+  &.is-act {
+    overflow: hidden;
+  }
+}
+
+.l-main {
+}
+
+#page {
+  position: relative;
+  overflow: clip;
+  z-index: 3;
+  background: var(--color-gradient-main);
+  &::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/common/bg_pattern.png');
+    background-size: res_px_max(30px, 45px) res_px_max(30px, 45px);
+    background-repeat: repeat;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.24;
+    z-index: -1;
+  }
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/common/bg_noize.png');
+    background-size: res_px_max(250px, 500px) res_px_max(250px, 500px);
+    opacity: 0.17;
+    background-repeat: repeat;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    mix-blend-mode: overlay;
+  }
+  &.-link {
+    padding: 0;
+  }
+}
+
+figure,
+picture {
+  display: block;
+}
+
+img {
+  vertical-align: bottom;
+  height: auto;
+  max-width: 100%;
+  min-height: 1px;
+  object-fit: cover;
+  &.-t {
+    object-position: center top;
+    &l {
+      object-position: left top;
+    }
+    &r {
+      object-position: right top;
+    }
+  }
+  &.-r {
+    object-position: right center;
+  }
+  &.-b {
+    object-position: center bottom;
+    &l {
+      object-position: left bottom;
+    }
+    &r {
+      object-position: right bottom;
+    }
+  }
+  &.-l {
+    object-position: left center;
+  }
+}
+
+.js-svg {
+  width: 1em;
+  height: 1em;
+  @at-root img#{&} {
+    opacity: 0;
+  }
+  @at-root svg#{&} {
+    opacity: 1;
+  }
+}
+
+svg {
+  overflow: hidden;
+}

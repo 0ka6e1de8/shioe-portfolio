@@ -1,0 +1,67 @@
+<div class="p-index_kv">
+  <div class="p-index_kv__motif">
+    <div class="js-infinite_slider keen-slider">
+      {
+        Array.from({ length: 5 }).map((_, index) => (
+          <div class="p-index_kv__motif__item keen-slider__slide">
+            <img src="/img/kv/kv_motif.png" alt="" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <div class="p-index_kv__illust">
+    <img src="/img/kv/kv_illust.png" alt="" />
+  </div>
+  <p class="p-index_kv__en">
+    <i><img src="/img/common/title_parts.png" alt="" /></i>
+    Portfolio
+  </p>
+</div>
+
+<style lang="scss">
+  .p-index_kv {
+    padding-block: res_px_max(70px, 140px);
+    position: relative;
+    z-index: 2;
+    &__illust {
+      inline-size: res_rem_max(356px, 1020px);
+      margin-inline: auto;
+    }
+    &__motif {
+      position: absolute;
+      top: 50%;
+      translate: 0 -50%;
+      left: 0;
+      width: 100vw;
+      z-index: -1;
+      &__item {
+        &.keen-slider__slide {
+          min-inline-size: res_rem_max(93px + 30px * 2, 155px + 60px * 2);
+          padding-inline: res_px_max(30px, 60px);
+        }
+      }
+    }
+    &__en {
+      text-transform: uppercase;
+      color: var(--color-white-00);
+      font-family: var(--font-en);
+      font-size: res_rem_max(13px, 24px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      line-height: 1;
+      gap: 8px;
+      letter-spacing: 0.26em;
+      margin-block-start: res_px_max(-10px, -60px);
+      i {
+        line-height: 1;
+        :global(img) {
+          vertical-align: middle;
+          inline-size: res_rem_max(14px, 15px);
+        }
+      }
+    }
+  }
+</style>

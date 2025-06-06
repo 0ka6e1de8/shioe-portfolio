@@ -1,0 +1,43 @@
+---
+import WorkItem from '../parts/workItem.astro';
+import { getCategoryWorks } from '@/lib/notion';
+type Props = {
+  category?: string;
+  panel: number;
+};
+
+const { category, panel } = Astro.props;
+
+const posts = await getCategoryWorks(category ?? '');
+---
+
+<div class={`js-tab_content ${panel === 0 && 'is-show'}`} data-panel={panel}>
+  <div class="p-index_works__contents">
+    {
+      posts.map((work) => {
+        return <WorkItem {...work} category={category} />;
+      })
+    }
+  </div>
+</div>
+
+<style lang="scss">
+  .js-tab_content {
+    display: none;
+    opacity: 0;
+    transition: all 0.5s ease;
+    &.is-show {
+      display: block;
+      opacity: 1;
+    }
+  }
+  .p-index_works__contents {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: res_px_max(16px, 24px);
+    min-height: res_px_max(300px, 500px);
+    @include mq-sp {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+</style>

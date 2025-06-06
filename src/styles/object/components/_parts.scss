@@ -1,0 +1,124 @@
+@use '../../foundation' as *;
+
+.c-modal_overlay {
+  background: var(--color-black-100);
+  position: fixed;
+  left: 0;
+  top: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur), visibility var(--dur);
+  &.is-act {
+    visibility: visible;
+    opacity: 0.45;
+  }
+}
+
+.c-modal {
+  inline-size: 90%;
+  max-inline-size: 1280px;
+  margin-inline: auto;
+  box-shadow: 0px 4px 50px 0px rgba(45, 140, 140, 0.1);
+  background: linear-gradient(to bottom, var(--color-white-00) 0%, var(--color-main-10) 100%);
+  border-radius: res_px_max(30px, 60px);
+  padding: res_px_max(25px, 40px);
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  inline-size: 100%;
+  transform: translate(-50%, -50%);
+  z-index: 9999999;
+  opacity: 0;
+  display: none;
+  transition: opacity var(--dur);
+  color: var(--color-main-60);
+  &.is-act {
+    display: block;
+    opacity: 1;
+  }
+  @include mq-md {
+    max-inline-size: 980px;
+  }
+  @include mq-tab {
+    max-inline-size: 90%;
+  }
+  &__trg {
+    cursor: pointer;
+    background: var(--color-gray-10);
+    border: 1px solid var(--color-gray-50);
+    inline-size: res_px_max(40px, 60px);
+    block-size: res_px_max(40px, 60px);
+    border-radius: 100vmax;
+    position: absolute;
+    right: 0;
+    top: 0;
+    translate: -50% -50%;
+    transition: scale var(--dur);
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      translate: -50% -50%;
+      inline-size: 20px;
+      block-size: 2px;
+      background: var(--color-black-100);
+      rotate: -135deg;
+    }
+    &::after {
+      rotate: 135deg;
+    }
+
+    @include hover {
+      &:hover {
+        scale: 1.1;
+      }
+    }
+    @include mq-sp {
+      right: -2em;
+      top: 0em;
+    }
+  }
+  &__thumb {
+    inline-size: 100%;
+    margin-block-end: res_px_max(20px, 40px);
+    font-size: res_rem_max(14px, 18px);
+    line-height: 1;
+    padding-block-end: res_px_max(8px, 10px);
+    img {
+      inline-size: 100%;
+      object-fit: cover;
+      border-radius: res_px_max(16px, 32px);
+    }
+  }
+  &__title {
+    font-size: res_rem_max(16px, 24px);
+    font-weight: 700;
+    margin-block-end: 1em;
+  }
+  &__link {
+    font-size: res_rem_max(15px, 18px);
+    margin-block-end: 0.75em;
+    a {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+  }
+  &__desc {
+  }
+  &_close {
+    inline-size: fit-content;
+    margin-inline: auto;
+    margin-block-start: res_px_max(20px, 40px);
+    border-bottom: 1px solid;
+    padding-block-end: res_px_max(5px, 10px);
+    cursor: pointer;
+  }
+}

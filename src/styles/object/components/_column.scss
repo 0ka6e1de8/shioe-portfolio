@@ -1,0 +1,139 @@
+@use '../../foundation' as *;
+
+$grid-column-max: 8;
+
+.c-grid-column {
+  display: grid;
+  &.-col1fr_3fr {
+    grid-template-columns: 1fr 3fr;
+    @include mq-tab {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @for $i from 1 through $grid-column-max {
+    &.-col#{($grid-column-max + 1) - $i} {
+      grid-template-columns: repeat(($grid-column-max + 1) - $i, minmax(0, 1fr));
+      @for $n from 1 through $grid-column-max {
+        &.-col#{($grid-column-max + 1) - $n} {
+          &-max {
+            @include mq-max {
+              grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr));
+            }
+          }
+          &-md {
+            @include mq-md {
+              grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr));
+            }
+          }
+          &-tab {
+            @include mq-tab {
+              grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr));
+            }
+          }
+          &-sp {
+            @include mq-sp {
+              grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr));
+            }
+          }
+          &-spmin {
+            @include mq-spmin {
+              grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr));
+            }
+          }
+        }
+      }
+      &-max {
+        @include mq-max {
+          grid-template-columns: repeat(($grid-column-max + 1) - $i, minmax(0, 1fr));
+        }
+        @for $n from 1 through $grid-column-max {
+          &.-col#{($grid-column-max + 1) - $n} {
+            &-md {
+              @include mq-md {
+                grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr)) !important;
+              }
+            }
+            &-tab {
+              @include mq-tab {
+                grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr)) !important;
+              }
+            }
+            &-sp {
+              @include mq-sp {
+                grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr)) !important;
+              }
+            }
+            &-spmin {
+              @include mq-spmin {
+                grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr)) !important;
+              }
+            }
+          }
+        }
+      }
+      &-md {
+        @include mq-md {
+          grid-template-columns: repeat(($grid-column-max + 1) - $i, minmax(0, 1fr));
+        }
+        @for $n from 1 through $grid-column-max {
+          &.-col#{($grid-column-max + 1) - $n} {
+            &-tab {
+              @include mq-tab {
+                grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr)) !important;
+              }
+            }
+            &-sp {
+              @include mq-sp {
+                grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr)) !important;
+              }
+            }
+            &-spmin {
+              @include mq-spmin {
+                grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr)) !important;
+              }
+            }
+          }
+        }
+      }
+      &-tab {
+        @include mq-tab {
+          grid-template-columns: repeat(($grid-column-max + 1) - $i, minmax(0, 1fr));
+        }
+        @for $n from 1 through $grid-column-max {
+          &.-col#{($grid-column-max + 1) - $n} {
+            &-sp {
+              @include mq-sp {
+                grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr)) !important;
+              }
+            }
+            &-spmin {
+              @include mq-spmin {
+                grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr)) !important;
+              }
+            }
+          }
+        }
+      }
+      &-sp {
+        @include mq-sp {
+          grid-template-columns: repeat(($grid-column-max + 1) - $i, minmax(0, 1fr));
+        }
+        @for $n from 1 through $grid-column-max {
+          &.-col#{($grid-column-max + 1) - $n} {
+            &-spmin {
+              @include mq-spmin {
+                grid-template-columns: repeat(($grid-column-max + 1) - $n, minmax(0, 1fr)) !important;
+              }
+            }
+          }
+        }
+      }
+      &-spmin {
+        @include mq-spmin {
+          grid-template-columns: repeat(($grid-column-max + 1) - $i, minmax(0, 1fr));
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+---
+import SectionTitlePrimary from '@/components/parts/sectionTitlePrimary.astro';
+---
+
+<section class="p-index_profile" id="link-profile">
+  <div class="c-container">
+    <SectionTitlePrimary>
+      <span class="en">Profile</span>
+      <span class="jp">[自己紹介]</span>
+    </SectionTitlePrimary>
+    <div class="p-index_profile__block">
+      <figure class="p-index_profile__block__pic">
+        <img src="/img/profile_img.png" alt="" />
+      </figure>
+      <div class="p-index_profile__block__text">
+        <div class="p-index_profile__block__name">
+          <div class="en"><em>S</em>hioe Misato</div>
+          <small class="jp">汐江 美里</small>
+        </div>
+        <p>
+          1997年生まれ。愛知県在住。<br />
+          Webデザイナーとして約3年半の実務経験があります。専門学校のWebサイトや広告制作を中心に、バナー制作、LP改善、日々の運用更新など幅広く担当。Illustrator・Photoshop・Figmaを活用したデザインだけでなく、効率化や修正対応も得意としています。現在はフルリモート勤務を活かしながら、自走して業務に取り組んでいます。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .p-index_profile {
+    background-color: var(--color-white-00);
+    padding-block: res_rem_max(60px, 100px) res_px_max(200px, 350px);
+    border-radius: res_px_max(30px, 60px) res_px_max(30px, 60px) 0 0;
+  }
+  .p-index_profile__block {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: res_px_max(20px, 40px);
+    @include mq-sp {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    &__pic {
+      overflow: hidden;
+      border-radius: res_px_max(16px, 32px);
+    }
+    &__text {
+      color: var(--color-main-80);
+    }
+    &__name {
+      font-weight: 700;
+      margin-block-end: res_px_max(28px, 32px);
+      .en {
+        font-family: var(--font-en);
+        font-size: res_rem_max(30px, 50px);
+        :global(em) {
+          color: var(--color-point-50);
+          font-style: normal;
+        }
+      }
+      .jp {
+        font-size: res_rem_max(16px, 20px);
+      }
+    }
+  }
+</style>

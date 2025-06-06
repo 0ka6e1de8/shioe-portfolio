@@ -1,0 +1,40 @@
+---
+import '@/styles/globals.scss';
+import '@fontsource-variable/jost';
+import '@fontsource/zen-kaku-gothic-new/400.css';
+import '@fontsource/zen-kaku-gothic-new/500.css';
+import '@fontsource/zen-kaku-gothic-new/700.css';
+import Header from '@/components/templates/header.astro';
+import Footer from '@/components/templates/footer.astro';
+import Profile from '@/components/views/profile.astro';
+import Kv from '@/components/views/kv.astro';
+import Works from '@/components/views/works.astro';
+import Loading from '@/components/views/loading.astro';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Portflio</title>
+  </head>
+  <body>
+    <Header />
+    <main class="l-main">
+      <Loading />
+      <div id="page" class="p-index">
+        <Kv />
+        <Works />
+        <Profile />
+      </div>
+    </main>
+    <Footer />
+    <script>
+      import '@/client';
+    </script>
+  </body>
+</html>
+
+<style lang="scss"></style>

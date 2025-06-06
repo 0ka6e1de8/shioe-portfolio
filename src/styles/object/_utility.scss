@@ -1,0 +1,574 @@
+@use '../foundation' as *;
+
+.u-block {
+  display: block;
+  &_center {
+    @extend .u-block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.u-none {
+  display: none;
+}
+
+.u-ib {
+  display: inline-block;
+}
+
+.u-left {
+  text-align: left;
+}
+
+.u-center {
+  text-align: center;
+  &-pc {
+    text-align: center;
+    @include mq-sp {
+      text-align: left;
+    }
+  }
+  &-tab {
+    text-align: center;
+    @include mq-tab {
+      text-align: left;
+    }
+  }
+}
+
+.u-right {
+  text-align: right;
+  &-pc {
+    text-align: right;
+    @include mq-sp {
+      text-align: left;
+    }
+  }
+}
+
+.u-link {
+  color: var(--color-main-blue-100);
+  transition: 0.4s;
+  @include hover {
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &.-scale {
+    overflow: hidden;
+    display: block;
+    img {
+      transition: 0.4s;
+    }
+    @include hover {
+      &:hover {
+        img {
+          transform: scale(1.02);
+        }
+      }
+    }
+  }
+}
+
+.u-justify {
+  text-align: justify;
+}
+
+.u-relative {
+  position: relative;
+}
+
+.u-absolute {
+  position: absolute;
+}
+
+.u-fixed {
+  position: fixed;
+}
+
+.u-flex-shrink {
+  &-0 {
+    flex-shrink: 0;
+  }
+}
+
+.u-flex {
+  display: flex;
+  &.-wrap {
+    flex-wrap: wrap;
+  }
+  &.-reverse {
+    flex-direction: reverse;
+  }
+  &.-inline {
+    display: inline-flex;
+  }
+  &.-astart {
+    align-items: flex-start;
+  }
+  &.-acenter {
+    align-items: center;
+  }
+  &.-aend {
+    align-items: flex-end;
+  }
+  &.-abaseline {
+    align-items: baseline;
+  }
+  &.-jbetween {
+    justify-content: space-between;
+  }
+  &.-jaround {
+    justify-content: space-around;
+  }
+  &.-jstart {
+    justify-content: flex-start;
+  }
+  &.-jcenter {
+    justify-content: center;
+  }
+  &.-jend {
+    justify-content: flex-end;
+  }
+  &.-sp-column {
+    @include mq-sp {
+      flex-direction: column;
+    }
+  }
+}
+
+.u-overflow {
+  &-auto {
+    overflow: auto;
+  }
+  &-visible {
+    overflow: visible !important;
+  }
+  &-hidden {
+    overflow: hidden;
+  }
+}
+
+.u-visibility {
+  &-visible {
+    visibility: visible;
+  }
+  &-hidden {
+    visibility: hidden;
+  }
+}
+
+.u-cursor {
+  &-pointer {
+    cursor: pointer;
+  }
+  &-grab {
+    cursor: grab;
+  }
+  &-wait {
+    cursor: wait;
+  }
+  &-not-allowed {
+    cursor: not-allowed;
+  }
+}
+
+.u-uppercase {
+  text-transform: uppercase;
+}
+
+.u-capitalize {
+  text-transform: capitalize;
+}
+
+.u-nowrap {
+  white-space: nowrap;
+}
+
+.u-breakall {
+  word-break: break-all;
+}
+
+.u-keepall {
+  word-break: keep-all;
+}
+
+.u-font {
+  &-jost {
+    @include font-jost(600);
+  }
+  &-en {
+    @include font-jost(600);
+  }
+}
+
+.u-weight {
+  @for $i from 1 through 9 {
+    &-#{$i * 100} {
+      font-weight: $i * 100;
+    }
+  }
+}
+
+.u-radius {
+  &-4 {
+    border-radius: res_px_max(2px, 4px);
+  }
+  &-5 {
+    border-radius: res_px_max(2px, 5px);
+  }
+  &-8 {
+    border-radius: res_px_max(4px, 8px);
+  }
+  &-10 {
+    border-radius: res_px_max(5px, 10px);
+  }
+  &-14 {
+    border-radius: res_px_max(7px, 14px);
+  }
+  &-15 {
+    border-radius: res_px_max(7.5px, 15px);
+  }
+  &-16 {
+    border-radius: res_px_max(8px, 16px);
+  }
+  &-18 {
+    border-radius: res_px_max(9px, 18px);
+  }
+  &-20 {
+    border-radius: res_px_max(10px, 20px);
+  }
+  &-25 {
+    border-radius: res_px_max(12.5px, 25px);
+  }
+  &-24 {
+    border-radius: res_px_max(12px, 24px);
+  }
+  &-80 {
+    border-radius: res_px_max(40px, 80px);
+  }
+}
+
+.u-border {
+  &-1 {
+    border: 1px solid var(--color-gray-30);
+    padding: res_px_max(6px, 12px);
+    &.-current {
+      border-color: var(--current-color);
+    }
+    &.-large {
+      padding: res_px_max(20px, 40px);
+    }
+  }
+  &-4 {
+    border: 4px solid var(--color-gray-30);
+    padding: res_px_max(20px, 40px) res_px_max(15px, 30px) res_px_max(15px, 30px);
+    &.-current {
+      border-color: var(--current-color);
+    }
+  }
+}
+
+.u-text {
+  &-underline {
+    text-decoration: underline;
+  }
+  &-dot {
+    border-bottom: 5px dotted var(--color-main-blue-100);
+    &.-green {
+      border-bottom: 5px dotted var(--color-main-green-100);
+    }
+  }
+}
+
+.u-color {
+  &-font {
+    color: var(--color-black-100);
+  }
+  &-blue {
+    color: var(--color-main-blue-100);
+  }
+  &-green {
+    color: var(--color-main-green-100);
+  }
+  &-white {
+    color: var(--color-white-00);
+  }
+  &-gray-90 {
+    color: var(--color-gray-90);
+  }
+  &-current {
+    color: var(--current-color);
+  }
+  &-red {
+    color: var(--color-main-red-100);
+  }
+}
+
+// 余白調整用のクラス
+@for $i from 0 through 20 {
+  .u-mt#{$i * 5} {
+    margin-top: res_px_max(5px * $i, 10px * $i) !important;
+  }
+
+  .u-mb#{$i * 5} {
+    margin-bottom: res_px_max(5px * $i, 10px * $i) !important;
+  }
+
+  .u-ml#{$i * 5} {
+    margin-left: res_px_max(5px * $i, 10px * $i) !important;
+  }
+
+  .u-mr#{$i * 5} {
+    margin-right: res_px_max(5px * $i, 10px * $i) !important;
+  }
+
+  .u-pt#{$i * 5} {
+    padding-top: res_px_max(5px * $i, 10px * $i) !important;
+  }
+
+  .u-pb#{$i * 5} {
+    padding-bottom: res_px_max(5px * $i, 10px * $i) !important;
+  }
+
+  .u-pl#{$i * 5} {
+    padding-left: res_px_max(5px * $i, 10px * $i) !important;
+  }
+
+  .u-pr#{$i * 5} {
+    padding-right: res_px_max(5px * $i, 10px * $i) !important;
+  }
+}
+
+$em-values: (
+  0_25: 0.25,
+  0_5: 0.5,
+  0_75: 0.75,
+  1: 1,
+  1_25: 1.25,
+  1_5: 1.5,
+  1_75: 1.75,
+  2: 2,
+  2_5: 2.5,
+  3: 3,
+);
+@each $class, $value in $em-values {
+  .u-mb-em#{$class} {
+    margin-bottom: #{$value}em !important;
+  }
+  .u-mt-em#{$class} {
+    margin-top: #{$value}em !important;
+  }
+  .u-pl-em#{$class} {
+    padding-left: #{$value}em !important;
+  }
+}
+
+$gap-values: (5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100);
+.u-gap {
+  &-0 {
+    gap: 0;
+  }
+  &-em {
+    &0_25 {
+      gap: 0.25em;
+    }
+    &0_5 {
+      gap: 0.5em;
+    }
+    &1 {
+      gap: 1em;
+    }
+    &1_5 {
+      gap: 1.5em;
+    }
+    &2 {
+      gap: 2em;
+    }
+  }
+  @each $value in $gap-values {
+    &-#{$value} {
+      gap: res_px_max($value * 0.5px, $value * 1px);
+    }
+    &-row-#{$value} {
+      row-gap: res_px_max($value * 0.5px, $value * 1px);
+    }
+    &-col-#{$value} {
+      column-gap: res_px_max($value * 0.5px, $value * 1px);
+    }
+  }
+}
+
+// デフォルトは表示、以下メディアクエリーで非表示
+.u-visible {
+  display: block;
+  &-max {
+    @include mq-max {
+      display: none !important;
+    }
+  }
+
+  &-md {
+    @include mq-md {
+      display: none !important;
+    }
+  }
+
+  &-tab {
+    @include mq-tab {
+      display: none !important;
+    }
+  }
+
+  &-sp {
+    @include mq-sp {
+      display: none !important;
+    }
+  }
+
+  &-spmin {
+    @include mq-spmin {
+      display: none !important;
+    }
+  }
+
+  &-min {
+    @include mq-min {
+      display: none !important;
+    }
+  }
+}
+
+// デフォルトは非表示、以下メディアクエリーで表示
+.u-hidden {
+  display: none;
+  &-max {
+    display: none !important;
+
+    @include mq-max {
+      display: block !important;
+
+      &.-f {
+        display: flex !important;
+      }
+
+      &.-i {
+        display: inline !important;
+      }
+
+      &.-ib {
+        display: inline-block !important;
+      }
+    }
+  }
+
+  &-md {
+    display: none !important;
+
+    @include mq-md {
+      display: block !important;
+
+      &.-f {
+        display: flex !important;
+      }
+
+      &.-i {
+        display: inline !important;
+      }
+
+      &.-ib {
+        display: inline-block !important;
+      }
+    }
+  }
+
+  &-tab {
+    display: none !important;
+
+    @include mq-tab {
+      display: block !important;
+
+      &.-f {
+        display: flex !important;
+      }
+
+      &.-i {
+        display: inline !important;
+      }
+
+      &.-ib {
+        display: inline-block !important;
+      }
+    }
+  }
+
+  &-sp {
+    display: none !important;
+
+    @include mq-sp {
+      display: block !important;
+
+      &.-f {
+        display: flex !important;
+      }
+
+      &.-i {
+        display: inline !important;
+      }
+
+      &.-ib {
+        display: inline-block !important;
+      }
+    }
+  }
+
+  &-spmin {
+    display: none !important;
+
+    @include mq-spmin {
+      display: block !important;
+
+      &.-f {
+        display: flex !important;
+      }
+
+      &.-i {
+        display: inline !important;
+      }
+
+      &.-ib {
+        display: inline-block !important;
+      }
+    }
+  }
+
+  &-min {
+    display: none !important;
+
+    @include mq-min {
+      display: block !important;
+
+      &.-f {
+        display: flex !important;
+      }
+
+      &.-i {
+        display: inline !important;
+      }
+
+      &.-ib {
+        display: inline-block !important;
+      }
+    }
+  }
+}
+
+.u-middle {
+  vertical-align: middle;
+}
+
+.u-indent {
+  padding-left: 1em;
+  text-indent: -1em;
+}
