@@ -7,7 +7,7 @@
   top: 0;
   inline-size: 100%;
   block-size: 100%;
-  z-index: 99999;
+  z-index: 100;
   display: grid;
   place-items: center;
   opacity: 0;
@@ -26,13 +26,12 @@
   box-shadow: 0px 4px 50px 0px rgba(45, 140, 140, 0.1);
   background: linear-gradient(to bottom, var(--color-white-00) 0%, var(--color-main-10) 100%);
   border-radius: res_px_max(30px, 60px);
-  padding: res_px_max(25px, 40px);
+  padding: res_px_max(20px, 40px);
   position: fixed;
   left: 50%;
   top: 50%;
-  inline-size: 100%;
-  transform: translate(-50%, -50%);
-  z-index: 9999999;
+  translate: -50%, -50%;
+  z-index: 101;
   opacity: 0;
   display: none;
   transition: opacity var(--dur);
@@ -45,7 +44,11 @@
     max-inline-size: 980px;
   }
   @include mq-tab {
+    overflow-y: auto;
     max-inline-size: 90%;
+    top: res_px_max(40px, 80px);
+    bottom: res_px_max(40px, 80px);
+    translate: -50% 0;
   }
   &__trg {
     cursor: pointer;
@@ -91,8 +94,12 @@
     font-size: res_rem_max(14px, 18px);
     line-height: 1;
     padding-block-end: res_px_max(8px, 10px);
+    @include mq-sp {
+      block-size: res_px_max(150px, 300px);
+    }
     img {
       inline-size: 100%;
+      block-size: 100%;
       object-fit: cover;
       border-radius: res_px_max(16px, 32px);
     }
@@ -120,5 +127,17 @@
     border-bottom: 1px solid;
     padding-block-end: res_px_max(5px, 10px);
     cursor: pointer;
+  }
+}
+
+.js-anim_elm {
+  &.-fadein {
+    opacity: 0;
+    translate: 0 20px;
+    transition: all 0.65s ease;
+    &.is-act {
+      opacity: 1;
+      translate: 0 0;
+    }
   }
 }

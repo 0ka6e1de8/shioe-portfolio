@@ -13,7 +13,7 @@ type Props = {
 const { class: className, id, title, desc, image, url, category } = Astro.props;
 ---
 
-<div class="c-work_item js-modal_trg" data-id={`modal-${id}`}>
+<div class="c-work_item js-modal_trg js-anim_elm -fadein" data-id={`modal-${id}`}>
   <div class="c-work_item__thumb">
     <img src={image} alt="" />
   </div>

@@ -1,5 +1,9 @@
+---
+import KvEn from '../parts/kvEn.astro';
+---
+
 <div class="p-index_kv">
-  <div class="p-index_kv__motif">
+  <div class="p-index_kv__motif -top">
     <div class="js-infinite_slider keen-slider">
       {
         Array.from({ length: 5 }).map((_, index) => (
@@ -10,13 +14,32 @@
       }
     </div>
   </div>
-  <div class="p-index_kv__illust">
-    <img src="/img/kv/kv_illust.png" alt="" />
+  <div class="p-index_kv__main">
+    <div class="p-index_kv__main__folder -front">
+      <img src="/img/kv/kv_folder_front.png" alt="" />
+    </div>
+    <div class="p-index_kv__main__folder -back">
+      <img src="/img/kv/kv_folder_back.png" alt="" />
+    </div>
+    <div class="p-index_kv__main__en">
+      <KvEn />
+    </div>
   </div>
   <p class="p-index_kv__en">
     <i><img src="/img/common/title_parts.png" alt="" /></i>
     Portfolio
   </p>
+  <div class="p-index_kv__motif -bottom">
+    <div class="js-infinite_slider keen-slider is-rtl">
+      {
+        Array.from({ length: 5 }).map((_, index) => (
+          <div class="p-index_kv__motif__item keen-slider__slide">
+            <img src="/img/kv/kv_motif.png" alt="" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
 </div>
 
 <style lang="scss">
@@ -24,17 +47,89 @@
     padding-block: res_px_max(70px, 140px);
     position: relative;
     z-index: 2;
-    &__illust {
-      inline-size: res_rem_max(356px, 1020px);
+    @include mq-sp {
+      // height: res_px_max(8≥40px, 1680px);
+      height: 100vh;
+      // padding-block-start: res_px_max(280px, 560px);
+      padding-block-start: 33vh;
+    }
+    &__main {
+      inline-size: res_rem_max(358px, 1109px);
+      aspect-ratio: 1109 / 649;
       margin-inline: auto;
+      position: relative;
+      &__folder {
+        position: absolute;
+        top: 0;
+        left: 0;
+        &.-back {
+          z-index: -1;
+          inline-size: 100%;
+        }
+        &.-front {
+          z-index: 2;
+          inline-size: 100%;
+        }
+      }
+      &__en {
+        position: absolute;
+        top: 0;
+        left: 0;
+        inline-size: res_rem_max(343px, 934px);
+        :global(.item) {
+          translate: 0 20px;
+          // scale: 0.8;
+          opacity: 0;
+          // opacity: 1;
+          transform-origin: center top;
+          transition: all 0.4s var(--ease-in-out-back);
+          @for $i from 0 through 5 {
+            &:nth-child(#{$i}) {
+              transition-delay: #{$i * 50}ms;
+            }
+          }
+        }
+        &.is-act {
+          :global(.item) {
+            translate: 0;
+            // scale: 1;
+            opacity: 1;
+          }
+        }
+      }
     }
     &__motif {
       position: absolute;
       top: 50%;
-      translate: 0 -50%;
+      translate: 0 -40%;
       left: 0;
       width: 100vw;
       z-index: -1;
+      opacity: 0;
+      transition: all 0.6s var(--ease-out-circ);
+      @include mq-sp {
+        translate: 0 20px;
+      }
+      &.-top {
+        @include mq-sp {
+          top: 10vh;
+        }
+      }
+      &.-bottom {
+        display: none;
+        @include mq-sp {
+          display: block;
+          top: auto;
+          bottom: 10vh;
+        }
+      }
+      &.is-act {
+        opacity: 1;
+        translate: 0 -50%;
+        @include mq-sp {
+          translate: 0 0 !important;
+        }
+      }
       &__item {
         &.keen-slider__slide {
           min-inline-size: res_rem_max(93px + 30px * 2, 155px + 60px * 2);

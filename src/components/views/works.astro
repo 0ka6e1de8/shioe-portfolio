@@ -8,12 +8,11 @@ const cats = await getCategoryies();
 
 <section class="p-index_works" id="link-works">
   <div class="c-container">
-    <SectionTitlePrimary class="-white">
-      <span class="en">Works</span>
+    <SectionTitlePrimary class="-white" en="Works">
       <span class="jp">[制作事例]</span>
     </SectionTitlePrimary>
     <div class="p-index_works__main">
-      <div class="p-index_works__tab">
+      <div class="p-index_works__tab js-anim_elm -fadein">
         {cats.map((cat: string, index: number) => <div class={`p-index_works__tab__item js-tab_trg ${index === 0 && 'is-active'}`} data-tab={index} set:html={cat} />)}
       </div>
       <div class="p-index_works__body">

@@ -1,6 +1,6 @@
-<footer class="l-footer" id="link-contact">
+<footer class="l-footer js-anim_elm" id="link-contact">
   <div class="c-container">
-    <div class="l-footer__title">
+    <div class="l-footer__title js-anim_elm">
       <svg viewBox="0 0 156 119" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle class="stroke" cx="78" cy="75" r="43"></circle>
         <circle class="fill" cx="78" cy="75" r="37" fill=""></circle>
@@ -77,6 +77,21 @@
     margin-block-start: res_px_max(-135px, -270px);
     z-index: 3;
     padding-block: res_px_max(120px, 230px);
+    @include mq-sp {
+      padding-block-start: res_px_max(100px, 200px);
+      padding-block-end: auto;
+      aspect-ratio: 375 / 357;
+      mask-image: url('/img/common/footer_mask_sp.svg');
+    }
+    &.js-anim_elm {
+      opacity: 0;
+      translate: 0 20px;
+      transition: all 0.6s var(--ease-in-out-back);
+      &.is-act {
+        opacity: 1;
+        translate: 0 0;
+      }
+    }
     &::after {
       content: '';
       width: 100%;
@@ -93,7 +108,7 @@
       mix-blend-mode: overlay;
     }
     &__title {
-      inline-size: res_px_max(130px, 160px);
+      inline-size: res_px_max(100px, 160px);
       margin-inline: auto;
       margin-block-end: res_px_max(16px, 24px);
       :global(.stroke) {
@@ -103,10 +118,28 @@
       :global(.fill) {
         fill: var(--color-point-50);
       }
+      .js-anim_elm & {
+        scale: 0.8;
+        opacity: 0;
+        transition: all 0.4s var(--ease-in-out-back) 0.6s;
+      }
+      .is-act & {
+        scale: 1;
+        opacity: 1;
+      }
     }
     &__mail {
       inline-size: res_rem_max(300px, 370px);
       margin-inline: auto;
+      .js-anim_elm & {
+        scale: 0.8;
+        opacity: 0;
+        transition: all 0.4s var(--ease-in-out-back) 0.67s;
+      }
+      .is-act & {
+        scale: 1;
+        opacity: 1;
+      }
       a {
         display: block;
         inline-size: 100%;
